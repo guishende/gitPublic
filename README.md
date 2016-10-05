@@ -1,89 +1,88 @@
 # gitPublic
 
-.git ÊÇÒş²ØµÄÎÄ¼şÄ¿Â¼£¬²»ÊÇ¹¤×÷Çø¡£
-stage(index)½Ğ×öÔİ´æÇø,git ×Ô¶¯´´½¨µÄµÚÒ»¸ö·ÖÖ§master,ÒÔ¼°Ö¸ÏòmasterµÄÒ»¸öÖ¸Õë½Ğ×öHEAD
+.git æ˜¯éšè—çš„æ–‡ä»¶ç›®å½•ï¼Œä¸æ˜¯å·¥ä½œåŒºã€‚
+stage(index)å«åšæš‚å­˜åŒº,git è‡ªåŠ¨åˆ›å»ºçš„ç¬¬ä¸€ä¸ªåˆ†æ”¯master,ä»¥åŠæŒ‡å‘masterçš„ä¸€ä¸ªæŒ‡é’ˆå«åšHEAD
 
-git ÃüÁî×Ü½á
+git å‘½ä»¤æ€»ç»“
 
-±¾µØ²Ù×÷¿â
-git config user.name"xx"ÅäÖÃÓÃ»§Ãûxx
-git config user.email"xx"ÅäÖÃÓÃ»§µÄemailÊÇxx
-git init ´´½¨²Ö¿â  ls -ah ÏÔÊ¾³öÀ´
-git add xx.x Ìí¼ÓÎÄ¼şµ½²Ö¿âÔİ´æÇø
-git rm xx.x É¾³ıÎÄ¼ş
-git commit -m "xxxx"  Ìá½»²Ö¿âµÄËµÃ÷
-git status ÕÆÎÕµ±Ç°²Ö¿âµÄ×´Ì¬£¨¾­³£Ê¹ÓÃ£©
-git diff xx.x	²é¿´µ±Ç°xxÎÄ¼şÓëÀúÊ·µÄ²»Í¬Ö®´¦
-git log °æ±¾ÀúÊ·ĞÅÏ¢£¨Ö»ÊÇµ±Ç°µÄÀúÊ·ĞÅÏ¢£©--pretty=oneline  µ¥ĞĞÏÔÊ¾°æ±¾ĞÅÏ¢
-git log --pretty=oneline --abbrev-commit	µ¥ĞĞ²é¿´ÀúÊ·°æ±¾£¬ËõĞ´°æ±¾ĞÅÏ¢
-git reset --hard HEAD^ ·µ»ØÉÏÒ»¸ö°æ±¾£¬ÉÏÉÏ¸ö^^,ÉÏ100¸ö£¬~100
-git reset --hard 1234567 ·µ»ØÖ¸¶¨SHA1Öµ°æ±¾
-git reflog ¼ÇÂ¼Ã¿´ÎµÄÃüÁî
-git checkout --xx.x xxÎÄ¼ş·µ»Øµ½°æ±¾¿â»òÔİ´æÇøµÄ×´Ì¬£¬¾ÍÊÇcommit »ò add ×´Ì¬
-git reset HEAD file °ÉÔİ´æÇøµÄÊı¾İ³·Ïúµô£¬·µ»Ø¹¤×÷Çø¡£HEADËµÃ÷ÊÇ×îĞÂµÄ°æ±¾
-git rm xx.x É¾³ı°æ±¾¿âÖĞµÄÎÄ¼ş¡£È»ºógit commit -m "xxxx"
-git checkout --xx.x ÎóÉ¾µÄ°æ±¾¿âÖĞµÄÎÄ¼şÌæ»»µ½¹¤×÷Çø
-Á´½ÓÔ¶³Ì¿âµÄ²Ù×÷
-ssh-keygen -t rsa -C "youremail@example.com"  Éú³ÉsshÃÜÔ¿£¬·Ö¹«Ô¿ºÍÃÜÔ¿£¬Ìí¼ÓÔÚgithubÖĞ
-git remote add my_site git@github.com:gushende/gitPublic.git Ìá½»±¾µØ¿âmy_site µ½Ô¶³Ì¿âgitPblic
-git push -u my_site master ÍÆËÍ±¾µØ¿âµÄmaster µ½Ô¶³Ì
-git push my_site master ÍÆËÍ±¾µØmaster·ÖÖ§µÄ×îĞÂĞŞ¸Äµ½Ô¶³Ì¿â
-git push my_site dev ÍÆËÍ·ÖÖ§devµ½Ô¶³Ì
-git checkout -b dev origin/dev±¾µØ´´½¨Ô¶³ÌµÄoriginµÄ·ÖÖ§dev
-git pull ÏÂÔØÏÂÀ´
-git branch --set-upstream dev origin/devÖ¸¶¨±¾µØ·ÖÖ§ÓëÔ¶³Ì·ÖÖ§origin/devµÄÁ´½Ó
-Ô¶³Ì²Ö¿â¿ËÂ¡ÏÂÀ´
-git clone git@github.com:guishende/gitLocal.git ´´½¨Ô¶³Ì¿âºó£¬¿ËÂ¡µ½±¾µØ
-git remote ²é¿´Ô¶³Ì¿â
-·ÖÖ§¹ÜÀí
-git checkout -b dev ´´½¨·ÖÖ§dev²¢ÇĞ»»,Ïàµ±ÓÚgit branch dev;git checkout dev
-git branch ²é¿´µ±Ç°·ÖÖ§
-git checkout master ÇĞ»»µ½master·ÖÖ§
-git merge dev °ÑdevµÄ·ÖÖ§ºÏ²¢µ½masterÉÏ
-git branch -d dev É¾³ı·ÖÖ§dev
-git log --graph --pretty=oneline --abbrev-commit  ·ÖÖ§ºÏ²¢Ê±³åÍ»»á×Ô¼ºÄÚÈİÖĞÈ«ÓÉ£¬½â¾ö³åÍ»ºóÔÙÌá½»
-git merge --no-ff -m "merge with no-ff" dev  ½ûÓÃfastforward -m Ìá½»µÄĞÅÏ¢£¬¿´²»³öÀúÊ·ºÏ²¢
-git stash ´æ´¢µ±Ç°µÄ¹¤×÷³¡¾°£¬¿É¶à´Î
-git stash list ²é¿´±£´æµÄÏÖ³¡
-git stash apply stash@{0} »Ö¸´ÏÖ³¡0²»É¾³ı£¬git stash drop É¾³ıÏÖ³¡
-git stash pop »Ö¸´ÏÖ³¡²¢É¾³ıstashÄÚÈİ
-git branch -D dev Ç°ĞĞÉ¾³ı·ÖÖ§dev
-±êÇ©
-git tag v1.0	´ò±êÇ©v1.0
-git tag ²é¿´ËùÓĞµÄ±êÇ©
-git tag v0.9 1234567 ¸ø1234567°æ±¾´ó±êÇ©v0.9
-git tag -a v0.1 -m "version 0.1 released" 1234567 ¸ø1234567´ò±êÇ©ºÍËµÃ÷ÎÄ×Ö
-git tag -s v0.2 -m "signed version 0.2 released" fec145a	-s ¸øÓÃË½Ô¿Ç©ÃûµÄ´ò±êÇ©
-git show v0.9	²é¿´°æ±¾±êÇ©v0.9
-git tag -d v0.1 É¾³ı±êÇ©
-git push origin <tagname> ÍÆ´Ó±êÇ©µ½Ô¶³Ì
-git push origin --tags Ò»´ÎĞÔÍÆËÍ±¾µØÉĞÎ´ÍÆËÍµÄ±êÇ©µ½Ô¶³Ì
-git push origin :refs/tags/v0.9 ÏÈ±¾µØÉ¾³ı±êÇ©ºó£¬´ËÃüÁîÉ¾³ıÔ¶³Ì±êÇ©
-ÆäËû
-git config --global color.ui true	ÈÃÃüÁî´°ÏÔÊ¾¸üĞÑÄ¿
-.gitignore ´´½¨Ò»¸ö´ËÎÄ¼ş£¬À´ºöÂÔ²»ÏëÌá½»µÄÎÄ¼ş
-git add -f App.class Ç¿ÖÆÌá½»ÎÄ¼şApp.class
-ËõĞ´
-git config --global alias.st status	ÓÃst´úÌæstatus,ÈçÏÂ
+æœ¬åœ°æ“ä½œåº“
+git config user.name"xx"é…ç½®ç”¨æˆ·åxx
+git config user.email"xx"é…ç½®ç”¨æˆ·çš„emailæ˜¯xx
+git init åˆ›å»ºä»“åº“  ls -ah æ˜¾ç¤ºå‡ºæ¥
+git add xx.x æ·»åŠ æ–‡ä»¶åˆ°ä»“åº“æš‚å­˜åŒº
+git rm xx.x åˆ é™¤æ–‡ä»¶
+git commit -m "xxxx"  æäº¤ä»“åº“çš„è¯´æ˜
+git status æŒæ¡å½“å‰ä»“åº“çš„çŠ¶æ€ï¼ˆç»å¸¸ä½¿ç”¨ï¼‰
+git diff xx.x	æŸ¥çœ‹å½“å‰xxæ–‡ä»¶ä¸å†å²çš„ä¸åŒä¹‹å¤„
+git log ç‰ˆæœ¬å†å²ä¿¡æ¯ï¼ˆåªæ˜¯å½“å‰çš„å†å²ä¿¡æ¯ï¼‰--pretty=oneline  å•è¡Œæ˜¾ç¤ºç‰ˆæœ¬ä¿¡æ¯
+git log --pretty=oneline --abbrev-commit	å•è¡ŒæŸ¥çœ‹å†å²ç‰ˆæœ¬ï¼Œç¼©å†™ç‰ˆæœ¬ä¿¡æ¯
+git reset --hard HEAD^ è¿”å›ä¸Šä¸€ä¸ªç‰ˆæœ¬ï¼Œä¸Šä¸Šä¸ª^^,ä¸Š100ä¸ªï¼Œ~100
+git reset --hard 1234567 è¿”å›æŒ‡å®šSHA1å€¼ç‰ˆæœ¬
+git reflog è®°å½•æ¯æ¬¡çš„å‘½ä»¤
+git checkout --xx.x xxæ–‡ä»¶è¿”å›åˆ°ç‰ˆæœ¬åº“æˆ–æš‚å­˜åŒºçš„çŠ¶æ€ï¼Œå°±æ˜¯commit æˆ– add çŠ¶æ€
+git reset HEAD file å§æš‚å­˜åŒºçš„æ•°æ®æ’¤é”€æ‰ï¼Œè¿”å›å·¥ä½œåŒºã€‚HEADè¯´æ˜æ˜¯æœ€æ–°çš„ç‰ˆæœ¬
+git rm xx.x åˆ é™¤ç‰ˆæœ¬åº“ä¸­çš„æ–‡ä»¶ã€‚ç„¶ågit commit -m "xxxx"
+git checkout --xx.x è¯¯åˆ çš„ç‰ˆæœ¬åº“ä¸­çš„æ–‡ä»¶æ›¿æ¢åˆ°å·¥ä½œåŒº
+é“¾æ¥è¿œç¨‹åº“çš„æ“ä½œ
+ssh-keygen -t rsa -C "youremail@example.com"  ç”Ÿæˆsshå¯†é’¥ï¼Œåˆ†å…¬é’¥å’Œå¯†é’¥ï¼Œæ·»åŠ åœ¨githubä¸­
+git remote add my_site git@github.com:gushende/gitPublic.git æäº¤æœ¬åœ°åº“my_site åˆ°è¿œç¨‹åº“gitPblic
+git push -u my_site master æ¨é€æœ¬åœ°åº“çš„master åˆ°è¿œç¨‹
+git push my_site master æ¨é€æœ¬åœ°masteråˆ†æ”¯çš„æœ€æ–°ä¿®æ”¹åˆ°è¿œç¨‹åº“
+git push my_site dev æ¨é€åˆ†æ”¯devåˆ°è¿œç¨‹
+git checkout -b dev origin/devæœ¬åœ°åˆ›å»ºè¿œç¨‹çš„originçš„åˆ†æ”¯dev
+git pull ä¸‹è½½ä¸‹æ¥
+git branch --set-upstream dev origin/devæŒ‡å®šæœ¬åœ°åˆ†æ”¯ä¸è¿œç¨‹åˆ†æ”¯origin/devçš„é“¾æ¥
+è¿œç¨‹ä»“åº“å…‹éš†ä¸‹æ¥
+git clone git@github.com:guishende/gitLocal.git åˆ›å»ºè¿œç¨‹åº“åï¼Œå…‹éš†åˆ°æœ¬åœ°
+git remote æŸ¥çœ‹è¿œç¨‹åº“
+åˆ†æ”¯ç®¡ç†
+git checkout -b dev åˆ›å»ºåˆ†æ”¯devå¹¶åˆ‡æ¢,ç›¸å½“äºgit branch dev;git checkout dev
+git branch æŸ¥çœ‹å½“å‰åˆ†æ”¯
+git checkout master åˆ‡æ¢åˆ°masteråˆ†æ”¯
+git merge dev æŠŠdevçš„åˆ†æ”¯åˆå¹¶åˆ°masterä¸Š
+git branch -d dev åˆ é™¤åˆ†æ”¯dev
+git log --graph --pretty=oneline --abbrev-commit  åˆ†æ”¯åˆå¹¶æ—¶å†²çªä¼šè‡ªå·±å†…å®¹ä¸­å…¨ç”±ï¼Œè§£å†³å†²çªåå†æäº¤
+git merge --no-ff -m "merge with no-ff" dev  ç¦ç”¨fastforward -m æäº¤çš„ä¿¡æ¯ï¼Œçœ‹ä¸å‡ºå†å²åˆå¹¶
+git stash å­˜å‚¨å½“å‰çš„å·¥ä½œåœºæ™¯ï¼Œå¯å¤šæ¬¡
+git stash list æŸ¥çœ‹ä¿å­˜çš„ç°åœº
+git stash apply stash@{0} æ¢å¤ç°åœº0ä¸åˆ é™¤ï¼Œgit stash drop åˆ é™¤ç°åœº
+git stash pop æ¢å¤ç°åœºå¹¶åˆ é™¤stashå†…å®¹
+git branch -D dev å‰è¡Œåˆ é™¤åˆ†æ”¯dev
+æ ‡ç­¾
+git tag v1.0	æ‰“æ ‡ç­¾v1.0
+git tag æŸ¥çœ‹æ‰€æœ‰çš„æ ‡ç­¾
+git tag v0.9 1234567 ç»™1234567ç‰ˆæœ¬å¤§æ ‡ç­¾v0.9
+git tag -a v0.1 -m "version 0.1 released" 1234567 ç»™1234567æ‰“æ ‡ç­¾å’Œè¯´æ˜æ–‡å­—
+git tag -s v0.2 -m "signed version 0.2 released" fec145a	-s ç»™ç”¨ç§é’¥ç­¾åçš„æ‰“æ ‡ç­¾
+git show v0.9	æŸ¥çœ‹ç‰ˆæœ¬æ ‡ç­¾v0.9
+git tag -d v0.1 åˆ é™¤æ ‡ç­¾
+git push origin <tagname> æ¨ä»æ ‡ç­¾åˆ°è¿œç¨‹
+git push origin --tags ä¸€æ¬¡æ€§æ¨é€æœ¬åœ°å°šæœªæ¨é€çš„æ ‡ç­¾åˆ°è¿œç¨‹
+git push origin :refs/tags/v0.9 å…ˆæœ¬åœ°åˆ é™¤æ ‡ç­¾åï¼Œæ­¤å‘½ä»¤åˆ é™¤è¿œç¨‹æ ‡ç­¾
+å…¶ä»–
+git config --global color.ui true	è®©å‘½ä»¤çª—æ˜¾ç¤ºæ›´é†’ç›®
+.gitignore åˆ›å»ºä¸€ä¸ªæ­¤æ–‡ä»¶ï¼Œæ¥å¿½ç•¥ä¸æƒ³æäº¤çš„æ–‡ä»¶
+git add -f App.class å¼ºåˆ¶æäº¤æ–‡ä»¶App.class
+ç¼©å†™
+git config --global alias.st status	ç”¨stä»£æ›¿status,å¦‚ä¸‹
 git config --global alias.co checkout
 git config --global alias.ci commit
 git config --global alias.br branch
-git config --global alias.unstage 'reset HEAD'³·Ïú
-git config --global alias.last 'log -1'	×îºóÌá½»µÄĞÅÏ¢
+git config --global alias.unstage 'reset HEAD'æ’¤é”€
+git config --global alias.last 'log -1'	æœ€åæäº¤çš„ä¿¡æ¯
 git config --global alias.lg "log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
-´î½¨
+æ­å»º
 sudo apt-get install git
 sudo adduser git
-/home/git/.ssh/authorized_keys	¹«Ô¿Ğ´½øÕâ¸öÎÄ¼şÖĞ
-sudo git init --bare sample.git	Ä¿Â¼ÏÂ´´½¨
-sudo chown -R git:git sample.gitÈ¨ÏŞĞŞ¸Ä
-git:x:1001:1001:,,,:/home/git:/usr/bin/git-shellµÇÂ¼È¨ÏŞĞŞ¸Ä£¨Ã»×ö£©/etc/passwd
-git clone git@server:/srv/sample.git¿ËÂ¡µ½±¾µØ£¬×¢ÒâÂ·¾¶
-ssh git@192.168.31.185	sshµÇÂ¼²âÊÔ
+/home/git/.ssh/authorized_keys	å…¬é’¥å†™è¿›è¿™ä¸ªæ–‡ä»¶ä¸­
+sudo git init --bare sample.git	ç›®å½•ä¸‹åˆ›å»º
+sudo chown -R git:git sample.gitæƒé™ä¿®æ”¹
+git:x:1001:1001:,,,:/home/git:/usr/bin/git-shellç™»å½•æƒé™ä¿®æ”¹ï¼ˆæ²¡åšï¼‰/etc/passwd
+git clone git@server:/srv/sample.gitå…‹éš†åˆ°æœ¬åœ°ï¼Œæ³¨æ„è·¯å¾„
+ssh git@192.168.31.185	sshç™»å½•æµ‹è¯•
 
-ÕâÊÇËµÃ÷ÎÄµµ£º
-±¾ÎÄµµÊÇ±¾µØ´´½¨Ö®ºó£¬ÉÏ´«µ½githubÉÏµÄ¡£
-µÚÒ»´Î×öµÄÎÄµµ£¬³öÏÖ±¾µØ²Ö¿âÃûºÍÔ¶³ÌµÄ²Ö¿âÃû²»ÏàÍ¬¡£
-ÔİÊ±ÕâÑù°É£¬ÒÔºóÏë°ì·¨¸ÄÕı¡£
-±¾µØmy_site remote:gitPublic
-
+è¿™æ˜¯è¯´æ˜æ–‡æ¡£ï¼š
+æœ¬æ–‡æ¡£æ˜¯æœ¬åœ°åˆ›å»ºä¹‹åï¼Œä¸Šä¼ åˆ°githubä¸Šçš„ã€‚
+ç¬¬ä¸€æ¬¡åšçš„æ–‡æ¡£ï¼Œå‡ºç°æœ¬åœ°ä»“åº“åå’Œè¿œç¨‹çš„ä»“åº“åä¸ç›¸åŒã€‚
+æš‚æ—¶è¿™æ ·å§ï¼Œä»¥åæƒ³åŠæ³•æ”¹æ­£ã€‚
+æœ¬åœ°my_site remote:gitPublic

@@ -2,5 +2,6 @@ eclipse.preferences.version=1
 encoding//webshare/company/admin.py=utf-8
 encoding//webshare/company/models.py=utf-8
 encoding//webshare/company/templatetags/functionTag.py=utf-8
+encoding//webshare/company/urls.py=utf-8
 encoding//webshare/company/views.py=utf-8
 encoding//webshare/webshare/settings.py=utf-8

@@ -17,4 +17,6 @@ urlpatterns = [
     url(r'^download/(?P<catid>\d{1,15})$', views.download_cat_detail),
     url(r'^news/$', views.news),
     url(r'^news/(?P<newsid>\d{1,15})$', views.news_detail),
+    
+    
 ]

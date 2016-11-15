@@ -13,8 +13,7 @@ def index(request):
     context.update(csrf(request))
     context['webname'] = settings.WEB_NAME
 #    return render_to_response('index.html',context,)
-    return render_to_response('index.html', context)
-#    return render(request, 'index.html')
+    return render_to_response('company/index.html', context)
 
 def products(request): 
     context = {}
@@ -25,7 +24,7 @@ def products(request):
         context['catname'] = cats[0].catname
         products = models.Products.objects.filter(catid=cats[0].id).order_by("id")
         context['products'] = products
-    return render_to_response('products.html', context)
+    return render_to_response('company/products.html', context)
 
 def product_cat_detail(request, catid): 
     context = {}
@@ -35,7 +34,7 @@ def product_cat_detail(request, catid):
     context['catname'] = cat.catname
     products = models.Products.objects.filter(catid=catid).order_by("id")
     context['products'] = products
-    return render_to_response('products.html', context)
+    return render_to_response('company/products.html', context)
 
 
 def service(request): 
@@ -47,7 +46,7 @@ def service(request):
         context['catname'] = cats[0].catname
         services = models.Service.objects.filter(catid=cats[0].id).order_by("id")
         context['services'] = services
-    return render_to_response('service.html', context)
+    return render_to_response('company/service.html', context)
 
 def service_cat_detail(request, catid): 
     context = {}
@@ -57,7 +56,7 @@ def service_cat_detail(request, catid):
     context['catname'] = cat.catname
     services = models.Service.objects.filter(catid=catid).order_by("id")
     context['services'] = services 
-    return render_to_response('service.html', context)
+    return render_to_response('company/service.html', context)
 
 def download(request): 
     context = {}
@@ -68,7 +67,7 @@ def download(request):
         context['catname'] = cats[0].catname
         downloads = models.Download.objects.filter(catid=cats[0].id).order_by("id")
         context['downloads'] = downloads
-    return render_to_response('download.html', context)
+    return render_to_response('company/download.html', context)
 
 def download_cat_detail(request, catid):
     context = {}
@@ -78,7 +77,7 @@ def download_cat_detail(request, catid):
     context['catname'] = cat.catname
     downloads = models.Download.objects.filter(catid=catid).order_by("id")
     context['downloads'] = downloads
-    return render_to_response('download.html', context)
+    return render_to_response('company/download.html', context)
     
 def faq(request): 
     context = {}
@@ -89,7 +88,7 @@ def faq(request):
         context['catname'] = cats[0].catname
         faqs = models.Faq.objects.filter(catid=cats[0].id).order_by("id")
         context['faqs'] = faqs
-    return render_to_response('faq.html', context)
+    return render_to_response('company/faq.html', context)
 
 def faq_cat_detail(request, catid):
     context = {}
@@ -99,7 +98,7 @@ def faq_cat_detail(request, catid):
     context['catname'] = cat.catname
     faqs = models.Faq.objects.filter(catid=catid).order_by("id")
     context['faqs'] = faqs
-    return render_to_response('faq.html', context)
+    return render_to_response('company/faq.html', context)
 
 def about(request): 
     context = {}
@@ -110,7 +109,7 @@ def about(request):
         context['catname'] = cats[0].catname
         abouts = models.About.objects.filter(catid=cats[0].id).order_by("id")
         context['abouts'] = abouts
-    return render_to_response('about.html', context)
+    return render_to_response('company/about.html', context)
 
 def about_cat_detail(request, catid): 
     context = {}
@@ -120,7 +119,7 @@ def about_cat_detail(request, catid):
     context['catname'] = cat.catname
     abouts = models.About.objects.filter(catid=catid).order_by("id")
     context['abouts'] = abouts
-    return render_to_response('about.html', context)
+    return render_to_response('company/about.html', context)
 
 
 def news(request):
@@ -129,7 +128,7 @@ def news(request):
     context['webname'] = settings.WEB_NAME  
     news = models.News.objects.all()
     context['items'] = news 
-    return render_to_response('news.html', context)
+    return render_to_response('company/news.html', context)
 
 def news_detail(request, newsid):
     context = {}
@@ -137,7 +136,7 @@ def news_detail(request, newsid):
     context['webname'] = settings.WEB_NAME  
     news = models.News.objects.get(id=newsid) 
     context['news'] = news
-    return render_to_response('news_detail.html', context)
+    return render_to_response('company/news_detail.html', context)
     
     
 

@@ -26,13 +26,21 @@ SECRET_KEY = 'tt))bnifkadg#aosjj5-5ao(mlusi799#%$-x5b9$nc4hg0qa@'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
-
+#域名
 ALLOWED_HOSTS = []
+#网站基本信息
+WEB_NAME ='模板练手网站'
+BLOG_NAME = 'gwei个人博客'
+BLOG_URL = 'http://127.0.0.1:8000/blog/'
+MEDIA_URL = '/uploads/'
+SITE_DESC = '基于Python-Django开发，现在是测试阶段，欢迎和大家交流'
+WEIBO_SINA = 'http://weibo.sina.com/yopoing'
+WEIBO_TENCENT = 'http://weibo.qq.com/yopoing'
+PRO_RSS = 'http://ww2w.baidu.com'
+PRO_EMAIL = 'yopoing@vip.qq.com'
 
-WEB_NAME ='分享网站'
-
+MEDIA_ROOT = os.path.join(BASE_DIR,  'blog/uploads')
 # Application definition
-
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -41,13 +49,12 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'company',
+    'blog',
     
-#    'users',
 ]
 
 #自定义的用户认证
-#AUTH_USER_MODEL = 'users.User'
-
+AUTH_USER_MODEL = 'blog.User'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -66,7 +73,9 @@ ROOT_URLCONF = 'webshare.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, r'company\templates\company'),
+        'DIRS': [
+                os.path.join(BASE_DIR, 'company/templates'),
+                os.path.join(BASE_DIR, 'blog/templates'),
                  ],
         'APP_DIRS': True,
         'OPTIONS': {
@@ -75,6 +84,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'blog.views.global_setting',
             ],
         },
     },
@@ -100,7 +110,8 @@ DATABASES = {
         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
 }
-
+#DATABASES_APPS_MAPPING={}
+#DATABASES_ROUTERS=[]
 
 # Password validation
 # https://docs.djangoproject.com/en/1.10/ref/settings/#auth-password-validators
@@ -160,10 +171,98 @@ STATIC_URL = '/static/'
     #'/path/to/others/static/',  # 用不到的时候可以不写这一行
 #)
 # 这个是默认设置，Django 默认会在 STATICFILES_DIRS中的文件夹 和 各app下的static文件夹中找文件
-# 注意有先后顺序，找到了就不再继续找了
-STATICFILES_FINDERS = (
-    "django.contrib.staticfiles.finders.FileSystemFinder",
-    "django.contrib.staticfiles.finders.AppDirectoriesFinder"
+# 注意有先后顺序，找到了就不再继续找了,设置先找APP中
+STATICFILES_FINDERS = (  
+    "django.contrib.staticfiles.finders.AppDirectoriesFinder",
+    "django.contrib.staticfiles.finders.FileSystemFinder"
 )
-#
+#  ---------------------------------------------------------
+#  Email
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+ 
+EMAIL_USE_TLS = False
+EMAIL_HOST = 'smtp.126.com'
+EMAIL_PORT = 25
+EMAIL_HOST_USER = 'guishende'
+EMAIL_HOST_PASSWORD = '123456zgw'
+DEFAULT_FROM_EMAIL = 'guishende@126.com'
+
+# ------
+# 自定义日志输出信息
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': True,
+    'formatters': {
+        'standard': {
+            'format': '%(asctime)s [%(threadName)s:%(thread)d] [%(name)s:%(lineno)d] [%(module)s:%(funcName)s] [%(levelname)s]- %(message)s'}  #日志格式
+    },
+    'filters': {
+    },
+    'handlers': {
+        'mail_admins': {
+            'level': 'ERROR',
+            'class': 'django.utils.log.AdminEmailHandler',
+            'include_html': True,
+            },
+        'default': {
+            'level':'DEBUG',
+            'class':'logging.handlers.RotatingFileHandler',
+            'filename': os.path.join(BASE_DIR,'log/all.log'),     #日志输出文件
+            'maxBytes': 1024*1024*5,                  #文件大小
+            'backupCount': 5,                         #备份份数
+            'formatter':'standard',                   #使用哪种formatters日志格式
+        },
+        'error': {
+            'level':'ERROR',
+            'class':'logging.handlers.RotatingFileHandler',
+            'filename': os.path.join(BASE_DIR,'log/error.log'),
+            'maxBytes':1024*1024*5,
+            'backupCount': 5,
+            'formatter':'standard',
+            },
+        'console':{
+            'level': 'DEBUG',
+            'class': 'logging.StreamHandler',
+            'formatter': 'standard'
+        },
+        'request_handler': {
+            'level':'DEBUG',
+            'class':'logging.handlers.RotatingFileHandler',
+            'filename': os.path.join(BASE_DIR,'log/script.log'),
+            'maxBytes': 1024*1024*5,
+            'backupCount': 5,
+            'formatter':'standard',
+            },
+        'scprits_handler': {
+            'level':'DEBUG',
+            'class':'logging.handlers.RotatingFileHandler',
+            'filename':os.path.join(BASE_DIR,'log/script.log'),
+            'maxBytes': 1024*1024*5,
+            'backupCount': 5,
+            'formatter':'standard',
+            }
+    },
+    'loggers': {
+        'django': {
+            'handlers': ['default', 'console'],
+            'level': 'DEBUG',
+            'propagate': False
+        },
+        'django.request': {
+            'handlers': ['request_handler'],
+            'level': 'DEBUG',
+            'propagate': False,
+            },
+        'scripts': {
+            'handlers': ['scprits_handler'],
+            'level': 'INFO',
+            'propagate': False
+        },
+        'blog.views': {
+            'handlers': ['default', 'error'],
+            'level': 'DEBUG',
+            'propagate': True
+        },
+    }
+}
 

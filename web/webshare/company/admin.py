@@ -57,10 +57,7 @@ class ExtendDownload(admin.ModelAdmin):
     list_per_page = 20
     
 
-admin.site.register(Announcement , ExtendAnnouncement)
-admin.site.register(Products , ExtendProducts)
-admin.site.register(News , ExtendNews)
-
+#分类
 admin.site.register(FaqCategory , ExtendFaqCategory)
 admin.site.register(ProductCategory , ExtendProductCategory)
 admin.site.register(ServiceCategory , ExtendProductServiceCategory)
@@ -68,6 +65,10 @@ admin.site.register(AboutCategory , ExtendAboutCategory)
 admin.site.register(DownloadCategory , ExtendDownloadCategory)
 
 admin.site.register(Faq, ExtendFaqs)
-admin.site.register(About, ExtendAbout)
+admin.site.register(Products , ExtendProducts)
 admin.site.register(Service, ExtendService)
+admin.site.register(About, ExtendAbout)
 admin.site.register(Download, ExtendDownload)
+
+admin.site.register(Announcement , ExtendAnnouncement)
+admin.site.register(News , ExtendNews)

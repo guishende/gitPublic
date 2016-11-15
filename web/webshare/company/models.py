@@ -10,8 +10,8 @@ class FaqCategory(models.Model):
     catname = models.CharField(max_length=150L, blank=True)
     class Meta:
         db_table = 't_faq_category'
-        verbose_name = u'faq_category'
-        verbose_name_plural = u'faq_category'
+        verbose_name = '常见问题分类'
+        verbose_name_plural = verbose_name
         app_label = 'company'
     def __unicode__(self):
         return self.catname
@@ -21,8 +21,8 @@ class ProductCategory(models.Model):
     catname = models.CharField(max_length=150L, blank=True)
     class Meta:
         db_table = 't_product_category'
-        verbose_name = u'product_category'
-        verbose_name_plural = u'product_category'
+        verbose_name = '产品分类'
+        verbose_name_plural = verbose_name
         app_label = 'company'
     def __unicode__(self):
         return self.catname
@@ -32,8 +32,8 @@ class ServiceCategory(models.Model):
     catname = models.CharField(max_length=150L, blank=True)
     class Meta:
         db_table = 't_service_category'
-        verbose_name = u'service_category'
-        verbose_name_plural = u'service_category'
+        verbose_name = '服务分类'
+        verbose_name_plural = verbose_name
         app_label = 'company'
     def __unicode__(self):
         return self.catname
@@ -43,8 +43,8 @@ class AboutCategory(models.Model):
     catname = models.CharField(max_length=150L, blank=True)
     class Meta:
         db_table = 't_about_category'
-        verbose_name = u'about_category'
-        verbose_name_plural = u'about_category'
+        verbose_name = '关于我们分类'
+        verbose_name_plural = verbose_name
         app_label = 'company'
     def __unicode__(self):
         return self.catname
@@ -54,8 +54,8 @@ class DownloadCategory(models.Model):
     catname = models.CharField(max_length=150L, blank=True)
     class Meta:
         db_table = 't_download_category'
-        verbose_name = u'download_category'
-        verbose_name_plural = u'download_category'
+        verbose_name = '下载资料分类'
+        verbose_name_plural = verbose_name
         app_label = 'company'
     def __unicode__(self):
         return self.catname
@@ -66,9 +66,9 @@ class Announcement(models.Model):
     content = models.TextField(blank=False , verbose_name="Content")
     createddate = models.DateField(null=True, db_column='createdDate', blank=True , default=time.strftime('%Y-%m-%d'), verbose_name='Date')
     class Meta:
-        db_table = u't_announcement'
-        verbose_name = u'announcement'
-        verbose_name_plural = u'announcement'
+        db_table = 't_announcement'
+        verbose_name = '公告'
+        verbose_name_plural = verbose_name
         app_label = 'company'
         
 class Products(models.Model):
@@ -82,8 +82,8 @@ class Products(models.Model):
     createddate = models.DateField(db_column='createdDate', blank=True , default=time.strftime('%Y-%m-%d') , verbose_name="Created Date")  # Field name made lowercase. This field type is a guess.
     class Meta:
         db_table = 't_products'
-        verbose_name = u'products'
-        verbose_name_plural = u'products'
+        verbose_name = '产品'
+        verbose_name_plural = verbose_name
         app_label = 'company'
 
 class News(models.Model):
@@ -93,8 +93,8 @@ class News(models.Model):
     createddate = models.DateField(null=True, db_column='createdDate', blank=True , default=time.strftime('%Y-%m-%d') , verbose_name="Created Date")  # Field name made lowercase.
     class Meta:
         db_table = 't_news'
-        verbose_name = u'news'
-        verbose_name_plural = u'news'
+        verbose_name = '新闻'
+        verbose_name_plural = verbose_name
         app_label = 'company'
         
 class Download(models.Model):
@@ -106,8 +106,8 @@ class Download(models.Model):
     createddate = models.DateField(null=True, db_column='createdDate', blank=True)  # Field name made lowercase.
     class Meta:
         db_table = 't_download'
-        verbose_name = u'download'
-        verbose_name_plural = u'download'
+        verbose_name = '下载资料'
+        verbose_name_plural = verbose_name
         app_label = 'company'
         
 class Faq(models.Model):
@@ -117,8 +117,8 @@ class Faq(models.Model):
     content = models.TextField(blank=True, verbose_name='content')
     class Meta:
         db_table = 't_faq'
-        verbose_name = u'faq'
-        verbose_name_plural = u'faq'
+        verbose_name = '常见问题'
+        verbose_name_plural = verbose_name
         app_label = 'company'
         
 class Service(models.Model):
@@ -128,8 +128,8 @@ class Service(models.Model):
     content = models.TextField(blank=True)
     class Meta:
         db_table = 't_service'
-        verbose_name = u'service'
-        verbose_name_plural = u'service'
+        verbose_name = '服务'
+        verbose_name_plural = verbose_name
         app_label = 'company'
         
 class About(models.Model):
@@ -139,8 +139,8 @@ class About(models.Model):
     content = models.TextField(blank=True)
     class Meta:
         db_table = 't_about' 
-        verbose_name = u'about'
-        verbose_name_plural = u'about'
+        verbose_name = '关于我们'
+        verbose_name_plural = verbose_name
         app_label = 'company'
 
 # Create your models here.

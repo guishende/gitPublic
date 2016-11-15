@@ -1,0 +1,46 @@
+{% extends 'blog/base.html' %}
+{% load staticfiles %}
+{% block left_content %}
+    {% include 'blog/ad.html' %}
+    <div class="topnews">
+      <h2>最新文章</h2>
+      {% for article in article_list %}
+      <div class="blogs">
+        <ul>
+          <h3><a href="{% url 'article' %}?id={{ article.id }}">{{ article.title }}</a></h3>
+          <p>{{ article.desc }}</p>
+          <p class="autor">
+          	<span class="lm f_l">{% for tag in article.tag.all %}<a href="/">{{ tag.name }}</a>&nbsp;{% endfor %}</span>
+          	<span class="dtime f_l">{{ article.date_publish | date:'Y-m-d' }}</span>
+          	<span class="viewnum f_r"><a href="/blog/">浏览({{ article.click_count }})</a></span>
+          	<span class="pingl f_r"><a href="/blog/">评论({{ article.comment_set.all.count }})</a></span>
+          	<span >{{article.user}}</span>
+          </p>
+        </ul>
+      </div>
+      {% endfor %}
+    </div>
+    {% include 'blog/pagination.html' %}
+    <br />
+    <div class="up-date text-center">
+    	<h3>待更新内容</h3>
+    	<p>
+    		<ol class="text-left">    			
+    			<li>增加登陆密码找回</li>
+    			<li>增加用户发表文章的接口界面，放在头像位置附近</li>
+    			<li>修改评论内容编辑器</li>
+    			<li>浏览计数</li>
+    			<li>cookie处理</li>
+    			<li>缓存处理</li>
+    			<li>中间层middleware的处理</li>
+    			<li>注册增加详细信息（另外增加：用户名，增加头像，注册页面美化）</li>
+    		</ol>
+    	</p>
+    	<h3>已经更新内容</h3>
+    	<p>
+    		<ol class="text-left">
+    			<li>增加修改密码（简单搞定）</li>
+    		</ol>
+    	</p>
+    </div>
+{% endblock %}

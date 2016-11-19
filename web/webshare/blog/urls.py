@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 #coding: utf-8
 from django.conf.urls import url
-from django.contrib.auth import views as auth_views
+#from django.contrib.auth import views as auth_views
 from blog import views
 
 
@@ -18,13 +18,9 @@ urlpatterns = [
     
 ]
 urlpatterns +=[
-    url(r'^accounts/changepwd/$', views.changepwd,name='changepwd'),
-    url(r'^forgot-password/$',views.forgot_password, name="forgot_password"),
-    #url(r'^login2', auth_views.login, name='login2'),#登陆      
-    url(r'^password/change/$',auth_views.password_change,name='password_change'),#修改密码
-    url(r'^password/change/done/$',auth_views.password_change_done,name='password_change_done'),#密码修改完成
-    url(r'^resetpassword/$',auth_views.password_reset,name='password_reset'),
-    url(r'^resetpassword/passwordsent/$',auth_views.password_reset_done,name='password_reset_done'),
-    url(r'^reset/done/$',auth_views.password_reset_complete,name='password_reset_complete'),
-    url(r'^reset/(?P<uidb64>[0-9A-Za-z_\-]+)/(?P<token>.+)/$',auth_views.password_reset_confirm,name='password_reset_confirm'),
+    url(r'^accounts/changepwd/$', views.changepwd,name='changepwd'),#修改密码
+    url(r'^forgot-password/$',views.forgot_password, name="forgot_password"),#自定义邮件修改密码，过程发邮件等
+    url(r'^resetpassword/passwordsent/$',views.password_reset_done,name='password_reset_done'),#修改密码完成跳转,名称不可修改
+    url(r'^reset/(?P<uidb64>[0-9A-Za-z_\-]+)/(?P<token>.+)/$',views.password_reset_confirm,name='password_reset_confirm'),
+    url(r'^reset/done/$',views.password_reset_complete,name='password_reset_complete'),
 ] 

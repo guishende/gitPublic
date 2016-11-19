@@ -27,7 +27,7 @@ SECRET_KEY = 'tt))bnifkadg#aosjj5-5ao(mlusi799#%$-x5b9$nc4hg0qa@'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 #域名
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['gwei.pub',]
 #网站基本信息
 WEB_NAME ='模板练手网站'
 BLOG_NAME = 'gwei个人博客'

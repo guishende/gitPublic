@@ -11,6 +11,8 @@ from django.db.models import Count
 from blog.models import User,Category,Article,Comment
 from blog.forms import LoginForm,RegForm,CommentForm,ChangepwdForm
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth import views as auth_views
+from django.template.context_processors import request
 #import json
 
 logger = logging.getLogger('blog.views')
@@ -142,6 +144,20 @@ def comment_post(request):
         logger.error(e)
     return redirect(request.META['HTTP_REFERER'])
 
+def category(request):
+    try:
+        # 先获取客户端提交的信息
+        cid = request.GET.get('cid', None)
+        try:
+            category = Category.objects.get(pk=id)
+        except Category.DoesNotExist:
+            return render(request, 'blog/failure.html', {'reason': '分类不存在'})
+        article_list = Article.objects.filter(category=category)
+        article_list = getPage(request, article_list)
+    except Exception as e:
+        logger.error(e)
+    return render(request, 'blog/category.html', locals())
+
 # 注销
 def do_logout(request):
     try:
@@ -204,7 +220,7 @@ def do_login(request):
 def changepwd(request):
     if request.method == 'GET':
         form = ChangepwdForm()
-        return render(request, 'blog/changepwd.html', locals())
+        return render(request, 'password/changepwd.html', locals())
     else:
         form = ChangepwdForm(request.POST)
         if form.is_valid():
@@ -216,26 +232,29 @@ def changepwd(request):
                 user.set_password(newpassword)
                 user.save()
                 changepwd_success=True
-                return render(request, 'blog/index.html',locals())
+                return render(request, 'password/index.html',locals())
             else:
                 oldpassword_is_wrong=True
-                return render(request,'blog/changepwd.html', locals())
+                return render(request,'password/changepwd.html', locals())
         else:
-            return render(request,'blog/changepwd.html',locals())
-        
+            return render(request,'password/changepwd.html',locals())
+'''
+通过发送邮件修改密码，使用官方提供的办法，修改成自定义的页面,本想增加中间层
+'''        
 def forgot_password(request):
-    return render(request, 'blog/forgotpwd.html')
+    #可自定义表单，发送协议，
+    return auth_views.password_reset(request,template_name='password/password_forgotpwd.html',
+                                     email_template_name='password/password_reset_email.html',
+                                     subject_template_name='password/password_reset_subject.txt')
 
-def category(request):
-    try:
-        # 先获取客户端提交的信息
-        cid = request.GET.get('cid', None)
-        try:
-            category = Category.objects.get(pk=id)
-        except Category.DoesNotExist:
-            return render(request, 'blog/failure.html', {'reason': '分类不存在'})
-        article_list = Article.objects.filter(category=category)
-        article_list = getPage(request, article_list)
-    except Exception as e:
-        logger.error(e)
-    return render(request, 'blog/category.html', locals())
+def password_reset_done(request):
+    #发送邮件完成跳转到这里
+    return auth_views.password_reset_done(request, template_name='password/password_reset_done.html')
+
+def password_reset_confirm(request,uidb64=None, token=None):
+    #邮件修改密码页面
+    return auth_views.password_reset_confirm(request, uidb64=uidb64, token=token, template_name='password/password_reset_confirm.html')
+
+def password_reset_complete(request):
+    #邮件密码修改完成显示
+    return auth_views.password_reset_done(request, template_name='password/password_reset_complete.html')

@@ -75,11 +75,18 @@ class CommentForm(forms.Form):
                                  max_length=50, error_messages={"required":"email不能为空",})
     url = forms.URLField(widget=forms.TextInput(attrs={"id":"url","type":"url","class": "comment_input",
                                                        "size":"25", "tabindex":"3"}),
-                              max_length=100, required=False)
-    comment = forms.CharField(widget=forms.Textarea(attrs={"id":"comment","class": "message_input",
+                              max_length=100, required=False)#可去除
+    article = forms.CharField(widget=forms.HiddenInput())                    
+    comment = forms.CharField(widget=forms.Textarea(attrs={"id":"editor_id","class": "message_input",
                                                            "required": "required", "cols": "25",
                                                            "rows": "5", "tabindex": "4"}),
                                                     error_messages={"required":"评论不能为空",})
-    article = forms.CharField(widget=forms.HiddenInput())
+    
+  
 
-
+class AddArticleForm(forms.Form):
+    tag = forms.CharField(required=True)
+    title = forms.CharField(required=True)
+    desc = forms.CharField(required=True)
+    content = forms.CharField(required=True)
+    category = forms.CharField(required=True)

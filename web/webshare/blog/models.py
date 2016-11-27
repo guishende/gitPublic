@@ -3,6 +3,7 @@ from __future__ import unicode_literals
 
 from django.db import models
 from django.contrib.auth.models import AbstractUser
+from django.template.defaultfilters import default
 
 # 用户模型.
 # 第一种：采用的继承方式扩展用户信息（本系统采用）
@@ -24,7 +25,7 @@ class User(AbstractUser):
 # tag（标签）
 class Tag(models.Model):
     name = models.CharField(max_length=30, verbose_name='标签名称')
-
+    user = models.ForeignKey(User,related_name='userTag_set',verbose_name='用户',blank=True)
     class Meta:
         db_table = 'blog_tag'
         verbose_name = '标签'
@@ -65,13 +66,13 @@ class ArticleManager(models.Manager):
 class Article(models.Model):
     title = models.CharField(max_length=50, verbose_name='文章标题')
     desc = models.CharField(max_length=50, verbose_name='文章描述')
-    content = models.TextField(verbose_name='文章内容')
-    click_count = models.IntegerField(default=0, verbose_name='点击次数')
-    is_recommend = models.BooleanField(default=False, verbose_name='是否推荐')
-    date_publish = models.DateTimeField(auto_now_add=True, verbose_name='发布时间')
-    user = models.ForeignKey(User, verbose_name='用户')
-    category = models.ForeignKey(Category, blank=True, null=True, verbose_name='分类')
-    tag = models.ManyToManyField(Tag, verbose_name='标签')
+    content = models.TextField(verbose_name='文章内容',blank=False)#默认必填
+    click_count = models.IntegerField(default=0, verbose_name='点击次数',blank=True)
+    is_recommend = models.BooleanField(default=False, verbose_name='是否推荐',blank=True)
+    date_publish = models.DateTimeField(auto_now_add=True, verbose_name='发布时间',blank=False)
+    user = models.ForeignKey(User, related_name='userArticle_set',verbose_name='用户',blank=False)
+    category = models.ForeignKey(Category, null=True, verbose_name='分类')
+    tag = models.ManyToManyField(Tag, related_name='tagArticle_set',verbose_name='标签',blank=False)
 
     objects = ArticleManager()
 
@@ -83,7 +84,13 @@ class Article(models.Model):
         app_label = 'blog'
     def __unicode__(self):
         return self.title
-
+'''    
+class Article_tag(models.Model):
+    tag = models.ForeignKey(Tag)
+    Article = models.ForeignKey(Article) 
+    class Meta:
+        db_table = 'blog_article_tag'
+'''        
 # 评论模型
 class Comment(models.Model):
     content = models.TextField(verbose_name='评论内容')
@@ -93,7 +100,7 @@ class Comment(models.Model):
     date_publish = models.DateTimeField(auto_now_add=True, verbose_name='发布时间')
     user = models.ForeignKey(User, blank=True, null=True, verbose_name='用户')
     article = models.ForeignKey(Article, blank=True, null=True, verbose_name='文章')
-    pid = models.ForeignKey('self', blank=True, null=True, verbose_name='父级评论')
+    pid = models.ForeignKey('self', related_name='pidcommnet_set', blank=True, null=True, verbose_name='父级评论')
 
     class Meta:
         db_table = 'blog_commnet'

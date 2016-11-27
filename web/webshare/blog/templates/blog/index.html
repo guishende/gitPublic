@@ -10,7 +10,7 @@
           <h3><a href="{% url 'article' %}?id={{ article.id }}">{{ article.title }}</a></h3>
           <p>{{ article.desc }}</p>
           <p class="autor">
-          	<span class="lm f_l">{% for tag in article.tag.all %}<a href="/">{{ tag.name }}</a>&nbsp;{% endfor %}</span>
+          	<span class="lm f_l">{% for tag in article.tag.name %}<a href="/">{{ tag.name }}</a>&nbsp;{% endfor %}</span>
           	<span class="dtime f_l">{{ article.date_publish | date:'Y-m-d' }}</span>
           	<span class="viewnum f_r"><a href="/blog/">浏览({{ article.click_count }})</a></span>
           	<span class="pingl f_r"><a href="/blog/">评论({{ article.comment_set.all.count }})</a></span>
@@ -25,21 +25,38 @@
     <div class="up-date text-center">
     	<h3>待更新内容</h3>
     	<p>
-    		<ol class="text-left">    			
-    			<li>增加登陆密码找回</li>
-    			<li>增加用户发表文章的接口界面，放在头像位置附近</li>
-    			<li>修改评论内容编辑器</li>
+    		<ol class="text-left">    				    			
+    			<li>增加标题搜索栏</li>
     			<li>浏览计数</li>
     			<li>cookie处理</li>
     			<li>缓存处理</li>
     			<li>中间层middleware的处理</li>
     			<li>注册增加详细信息（另外增加：用户名，增加头像，注册页面美化）</li>
+    			<li>用户注册的去重查询</li>
     		</ol>
+    	</p>
+    	<p>
+    		*重点、难点
+			表单提交与处理
+			文件上传 - 如用户头像 图片裁剪
+			session与cookie - 用户状态信息保存到客户端
+			ORM - 对象关系映射， python对象与数据库的关联
+			模板 - 模板规划，父模板， 标签， 过滤器
+			jQuery - 比如表单验证
+			Ajax - 实现和处理Ajax请求
+			json, xml - 数据格式
+			后台管理 - admin
+			日志调试 - 日志设置与查看
+			缓存
+			安全 - django安全配置，csrf, sql注入
     	</p>
     	<h3>已经更新内容</h3>
     	<p>
     		<ol class="text-left">
     			<li>增加修改密码（简单搞定）</li>
+    			<li>增加登陆密码找回</li>
+    			<li>增加用户发表文章的接口界面，放在头像位置附近</li>
+    			<li>修改评论内容编辑器</li>
     		</ol>
     	</p>
     </div>

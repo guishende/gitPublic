@@ -14,6 +14,7 @@
 <script type="text/javascript" src="{% static 'js/jquery.min.js' %}"></script>
 <script type="text/javascript" src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>
 <script type="text/javascript" src="{% static 'js/sliders.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/public_article.js' %}"></script>
 <!--[if lt IE 9]>
 <script src="js/modernizr.js"></script>
 <![endif]-->
@@ -21,6 +22,7 @@
 </head>
 
 <body>
+{% block content %}
 <!--	-->
   <div class="logo">
   	<div class="container">
@@ -54,6 +56,7 @@
 						<div class="col-sm-3 column text-left">
 							<br />
 							<p><a href="{% url 'changepwd' %}">修改密码</a></p>
+							<p class="write">写文章</a></p>
 						</div>
   				</div>	
       	{% endif %}
@@ -61,7 +64,31 @@
   		</div>     
   	</div>     
   </div>
-  
+  <!--
+  	作者：guishende@126.com
+  	时间：2016-11-21
+  	描述：弹窗编辑文章
+  -->
+  <div id="addForm">
+        <span>添加文章</span><span class="close">×</span>
+        
+        <form action="{% url 'add_article' %}" method="post">
+        	<label>分类</label><br />        	
+            {% csrf_token %}            
+            <select name="category">
+            	{% for category in category_list %}
+                <option value="{{category}}">{{category}}</option>
+              {% endfor %} 
+            </select>            
+            <input id="tag" type="text" name="tag" placeholder="请输入标签" required="required">            
+            <input id="title" type="text" name="title" placeholder="请输入标题" required="required">
+            <input id="desc" type="text" name="desc" placeholder="请输入描述" required="required">
+            <textarea name="content" placeholder="请输入内容" required="required"></textarea>
+            <button type="submit">发布</button>
+            <button class="close1" type="button">取消</button>
+        </form>
+    </div>
+    
   <nav id="topnav" class="f_r">
     <ul>
       <a href="/blog/">首页</a>
@@ -71,7 +98,10 @@
     </ul>
     <script src="{% static 'js/nav.js' %}"></script>
   </nav>
-  
+<!--
+导航栏到此结束
+-->
+{% block content_body %}
 <article>
   <div class="l_box f_l">
       {% block left_content %}{% endblock %}
@@ -92,7 +122,7 @@
     <!--tit01 end-->
     
     <div class="moreSelect" id="lp_right_select">
-      <script>
+<script>
 window.onload = function ()
 {
   var oLi = document.getElementById("tab").getElementsByTagName("li");
@@ -111,6 +141,7 @@ window.onload = function ()
   }
 }
 </script>
+
       <div class="ms-top">
         <ul class="hd" id="tab">
           <li class="cur"><a href="/blog/">浏览排行</a></li>
@@ -194,9 +225,12 @@ window.onload = function ()
   </div>
   <!--r_box end -->
 </article>
+{% endblock %}
+{% endblock %}
 <footer>
   <p class="ft-copyright">gwei的个人博客 杭ICP备xxxxxxx号-1</p>
   <div id="tbox"> <a id="togbook" href="/"></a> <a id="gotop" href="javascript:void(0)"></a> </div>
 </footer>
+	
 </body>
 </html>

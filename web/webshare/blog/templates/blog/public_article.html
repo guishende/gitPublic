@@ -1,0 +1,23 @@
+{% extends 'blog/base.html' %}
+{% load staticfiles %}
+
+
+{% block content %}
+{% block content_boay %}
+
+<div id="articleDetail">
+            <form action="{% url 'edit' %}" method="post">
+                {% csrf_token %}
+                <input type="text" name="title" value="{{ article.title }}" readonly>
+                <textarea name="content" readonly>{{ article.content }}</textarea>
+                <span>{{ article.user }}</span>
+                <input type="text" name="publishTime" value="{{ article.publish_time | date:"Y-m-d H:i:s"}}" readonly="readonly">
+                <button type="button" id="delete"><a href="{% url 'deleteArticle' %}?title={{ article.title }}&&publishTime={{ article.publish_time | date:"Y-m-d H:i:s" }}" title="delete">删除</a></button>
+                <button type="button" id="edit">编辑</button>
+                <button type="submit" id="save">保存</button>
+                <button type="button" id="cancel">取消</button>
+            </form>
+</div>
+
+{% endblock %}
+{% endblock %}

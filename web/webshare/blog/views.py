@@ -1,18 +1,24 @@
 # -*- coding: utf-8 -*-
 import logging
+import datetime
+#import json
+
 from django.shortcuts import render, redirect
 #from django.core.urlresolvers import reverse
 from django.conf import settings
+from django.urls import reverse
 from django.contrib.auth import logout, login, authenticate
 from django.contrib.auth.hashers import make_password
 from django.core.paginator import Paginator, InvalidPage, EmptyPage, PageNotAnInteger
 
 from django.db.models import Count
-from blog.models import User,Category,Article,Comment
-from blog.forms import LoginForm,RegForm,CommentForm,ChangepwdForm
+from blog.models import User,Category,Article,Comment, Tag
+from blog.forms import LoginForm,RegForm,CommentForm,ChangepwdForm,AddArticleForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import views as auth_views
-from django.template.context_processors import request
+
+import blog
+
 #import json
 
 logger = logging.getLogger('blog.views')
@@ -84,7 +90,7 @@ def tag(request):
 
 # 分页代码,增加分页属性
 def getPage(request, article_list):
-    paginator = Paginator(article_list, 2)#2个文章进行分页
+    paginator = Paginator(article_list, 5)#2个文章进行分页
     page = int(request.GET.get('page', 1))
     try:
         article_list = paginator.page(page)
@@ -92,14 +98,14 @@ def getPage(request, article_list):
         article_list = paginator.page(1)
     return article_list
 
-# 文章详情
+# 文章详情页面
 def article(request):
     try:
         # 获取文章id
-        id = request.GET.get('id', None)
+        aid = request.GET.get('id', None)
         try:
             # 获取文章信息
-            article = Article.objects.get(pk=id)
+            article = Article.objects.get(pk=aid)
         except Article.DoesNotExist:
             return render(request, 'blog/failure.html', {'reason': '没有找到对应的文章'})
 
@@ -107,42 +113,86 @@ def article(request):
         comment_form = CommentForm({'author': request.user.username,
                                     'email': request.user.email,
                                     'url': request.user.url,
-                                    'article': id} if request.user.is_authenticated() else{'article': id})
-        # 获取评论信息
+                                    'article': aid} if request.user.is_authenticated() else{'article': id})#此处故意写错，不登陆文章id不正确
+        # 获取评论信息                                            
         comments = Comment.objects.filter(article=article).order_by('id')
         comment_list = []
         for comment in comments:
-            for item in comment_list:
-                if not hasattr(item, 'children_comment'):
-                    setattr(item, 'blog/children_comment', [])
+             
+            for item in comment_list:#前端全部有子评论
+                if not hasattr(item, 'children_comment'):#设置子评论属性
+                    setattr(item, 'children_comment', [])
                 if comment.pid == item:
                     item.children_comment.append(comment)
                     break
-            if comment.pid is None:
+            
+            if comment.pid is None:#没有父评论
                 comment_list.append(comment)
+            '''    
+            else :#是子评论
+                #次次级评论也会出来，父级出现重复
+                pcommet=comment.pid                
+                if not hasattr(pcommet, 'children_comment'):#设置子评论属性
+                    setattr(pcommet, 'children_comment', [comment])                                       
+                else :                    
+                    pcommet.children_comment.append(comment)                                       
+                comment_list.append(pcommet)
+            '''
     except Exception as e:
         print e
         logger.error(e)
     return render(request, 'blog/article.html', locals())
 
+def add_article(request):
+#    username = request.session.get('user')
+    username = request.user.username
+    user = User.objects.get(username=username)
+    print user
+    addarticle=AddArticleForm(request.POST)
+    
+    if addarticle.is_valid() :
+        #死机在此处
+        tag = Tag.objects.create(name = addarticle.cleaned_data["tag"],user=user)
+        category= Category.objects.create(name = addarticle.cleaned_data["category"])
+        #tag.save()
+        article = Article.objects.create(user=user,                                                                         
+                                title=addarticle.cleaned_data["title"],
+                                desc=addarticle.cleaned_data["desc"],
+                                content=addarticle.cleaned_data["content"],
+                                category=category,
+                                date_publish = datetime.datetime.now()
+                                )         
+        article.save()
+        article.tag.add(tag)
+    else :  
+        return render(request, 'blog/failure.html', {'reason': addarticle.errors})                             
+    
+    #return render(request, 'blog/public_article.html', {'article': article, 'user': user, 'List': json.dumps(['文章发布成功', ])})
+    return redirect(reverse(blog.views.index))
+
 # 提交评论
 def comment_post(request):
     try:
         comment_form = CommentForm(request.POST)
+        
         if comment_form.is_valid():
             #获取表单信息
+                                
             comment = Comment.objects.create(username=comment_form.cleaned_data["author"],
                                              email=comment_form.cleaned_data["email"],
                                              url=comment_form.cleaned_data["url"],
                                              content=comment_form.cleaned_data["comment"],
                                              article_id=comment_form.cleaned_data["article"],
-                                             user=request.user if request.user.is_authenticated() else None)
+                                             user=request.user if request.user.is_authenticated() else None
+                                            #pid=comment_form.cleaned_data["pid"] if comment_form.cleaned_data["pid"]
+                                             )                                                        
             comment.save()
         else:
             return render(request, 'blog/failure.html', {'reason': comment_form.errors})
     except Exception as e:
         logger.error(e)
     return redirect(request.META['HTTP_REFERER'])
+
 
 def category(request):
     try:

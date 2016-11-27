@@ -4,4 +4,5 @@ KindEditor.ready(function(K) {
                     height:'200px',
                     uploadJson: '/admin/upload/kindeditor',
                 });
+                
         });

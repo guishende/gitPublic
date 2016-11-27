@@ -11,5 +11,5 @@
 
 # 本人邮箱guishende@126.com，
 ## 还在更新[网站](www.gwei.pub/blog)www.gwei.pub/blog
-### 有问题可发邮件给我联系
+### 有问题可发邮件给我联系，互相学习交流。
 ### 也欢迎给我提供一个python工作，地点杭州

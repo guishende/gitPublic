@@ -176,8 +176,7 @@ def comment_post(request):
         comment_form = CommentForm(request.POST)
         
         if comment_form.is_valid():
-            #获取表单信息
-                                
+            #获取表单信息                                
             comment = Comment.objects.create(username=comment_form.cleaned_data["author"],
                                              email=comment_form.cleaned_data["email"],
                                              url=comment_form.cleaned_data["url"],

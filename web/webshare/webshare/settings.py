@@ -27,17 +27,17 @@ SECRET_KEY = 'tt))bnifkadg#aosjj5-5ao(mlusi799#%$-x5b9$nc4hg0qa@'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 #域名
-ALLOWED_HOSTS = ['gwei.pub',]
+ALLOWED_HOSTS = ['gwei.pub','www.gwei.pub','www.gwei.pub/blog']
 #网站基本信息
 WEB_NAME ='模板练手网站'
 BLOG_NAME = 'gwei个人博客'
 BLOG_URL = 'http://127.0.0.1:8000/blog/'
 MEDIA_URL = '/uploads/'
 SITE_DESC = '基于Python-Django开发，现在是测试阶段，欢迎和大家交流'
-WEIBO_SINA = 'http://weibo.sina.com/yopoing'
-WEIBO_TENCENT = 'http://weibo.qq.com/yopoing'
-PRO_RSS = 'http://ww2w.baidu.com'
-PRO_EMAIL = 'yopoing@vip.qq.com'
+WEIBO_SINA = 'http://www.gwei.pub/blog'
+WEIBO_TENCENT = 'http://www.gwei.pub/blog'
+PRO_RSS = 'http://www.baidu.com'
+PRO_EMAIL = 'guishende@126.com'
 
 MEDIA_ROOT = os.path.join(BASE_DIR,  'blog/uploads')
 # Application definition
